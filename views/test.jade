@@ -1,0 +1,53 @@
+doctype html
+html
+	head
+		title Fit Square
+		link(rel='stylesheet' href='css/bootstrap.css')
+		script(src='js/jquery-2.1.4.js')
+		script(src='js/bootstrap.js')
+		
+		script.
+			var versionData;
+			$(document).ready(function(){
+				$("#btnView").on("click", function() { 
+					$.ajax({
+						type: "GET",
+						url: "/program/getVersion?programID="+$("#selProgramID option:selected").val(),
+						dataType: "JSON",
+						success: function(data){
+							versionData= JSON.stringify(data);
+							$("#resultView").text(versionData);
+						},
+						error:function(xhr, status, error){
+							alert("error");
+						}
+					});
+				});
+				
+				$("#btnCreate").on("click", function() { 
+					$.ajax({
+						type: "GET",
+						url: "/program/versionCompare?programID="+$("#selProgramID option:selected").val(),
+						dataType: "JSON",
+						success: function(data){
+							modifiedData= JSON.stringify(data);	
+							$("#resultView").text(modifiedData);
+						},
+						error:function(xhr, status, error){
+							alert("error");
+						}
+					});
+				});
+			});
+	body
+		select.selectpicker.form-control(id="selProgramID" style="width: 226px;border-left-width: 1px;border-top-width: 1px;margin-top: 10px;margin-left: 10px;")
+			each value in result
+				option(value=value.programID)= value.programName
+		div.btn-group(role="group" style="padding-top: 10px; padding-left: 10px;")
+			button.btn.btn-primary(id="btnCreate") 생성
+			button.btn.btn-default(id="btnView") 보기
+			
+		div.page-header 
+			h1 Result	
+		
+		#resultView
