@@ -26,16 +26,19 @@ app.use('/', routes);
 app.use('/users', users);
 
 
+app.get('/GetDBVersion', function(req,res) {
+  var temp = 1;
+  res.send(temp);
+})
+
 app.get('/GetDB', function(req, res){
   var fs = require("fs");
-
   fs.readFile('./sql/IotData.sql','utf8',function(err,data){
     res.send(data);
     console.log(data);
   })
 
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
