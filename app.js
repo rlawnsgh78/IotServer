@@ -29,6 +29,7 @@ app.use('/users', users);
 app.get('/GetDBVersion', function(req,res) {
   var temp = 1;
   res.send(temp);
+  console.log(temp);
 })
 
 app.get('/GetDB', function(req, res){
