@@ -36,7 +36,7 @@ app.get('/GetDBVersion', function(req,res) {
 
 app.get('/GetDB', function(req, res){
   var fs = require("fs");
-  fs.readFile('./sql/IotData.sql','utf8',function(err,data){
+  fs.readFile('./sql/subwaydb.sql','utf8',function(err,data){
     res.send(data);
     console.log(data);
   })
