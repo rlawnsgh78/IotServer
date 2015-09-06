@@ -27,9 +27,11 @@ app.use('/users', users);
 
 
 app.get('/GetDBVersion', function(req,res) {
-  var temp = 1;
-  res.send(temp);
-  console.log(temp);
+  var sqlManager = require('./routes/util/sqlManager');
+  sqlManager.query('SELECT * FROM `version` LIMIT 0, 1', function(err, result){
+    console.log(result);
+    res.send(result);
+  });
 })
 
 app.get('/GetDB', function(req, res){
